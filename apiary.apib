@@ -1,0 +1,696 @@
+FORMAT: 1A
+HOST: https://komornik.apiblueprint.org/
+
+# Komornik app 
+
+It's Komornik API app to manage your bills.
+
+
+
+## Users collection [/users/{?login,password,lastname,firstname,mail}]
+
+### User [GET]
+
++ Response 200 (application/json)
+
+        {   
+            "mail": "marcikn@xd.pl"
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Create a New User [POST]
++ Request (application/json)
+
+        {
+            "mail": "newmail@xd.pl" 
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+            "password": "Ara$*kadabra2"
+        }
++ Response 200 (application/json)
+
+        {
+            "mail": "newmail@xd.pl" 
+            "userID": 11,
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+            "password": "Ara$*kadabra2"
+        }
+  
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+### Delete a User [DELETE]
++ Request (application/json)
+
+        {
+            "userID": 21
+        }
++ Response 200 (application/json)
+
+        {
+            "Message": "Success!"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Update a User [PATCH]
+
++ Request (application/json)
+
+        {
+            "mail": "newmail2@xd.pl" 
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+            "password": "abrakadabra2"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "userID": 14,
+            "mail": "newmail2@xd.pl" 
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+            "password": "abrakadabra2"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+## Bills collection [/Users/Commitments/Bills/{?recipientID,commitmentID,amount,isPaid}]
+ 
+### Bill [GET]
+
++ Response 200 (application/json)
+
+        {
+            "billID": 1,
+            "recipientID": 1,
+            "commitmentID": 1,
+            "amount": 2.37,
+            "isPaid": "no"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Create new bill [POST]
++ Request (application/json)
+
+        {
+            "recipientID": 11,
+            "commitmentID": 113,
+            "amount": 21.37,
+            "isPaid": "no"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "billID": 11,
+            "recipientID": 11,
+            "commitmentID": 113,
+            "amount": 21.37,
+            "isPaid": "no"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### Delete bill [DELETE]
++ Request (application/json)
+
+        {
+            "billID": 21
+        }
+
++ Response 200 (application/json)
+
+        {
+            "Message": "Success!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Update bill [PATCH]
+
++ Request (application/json)
+
+        {
+            "recipientID": 1,
+            "commitmentID": 1,
+            "amount": 25.37,
+            "isPaid": "yes"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "billID": 1,
+            "recipientID": 1,
+            "commitmentID": 1,
+            "amount": 25.37,
+            "isPaid": "yes"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+## Commitments collection [/Commitments/{?commitmentDesc,commitmentAmount,occurenceDate,expirationDate,giverID,groupID}]
+
+### Commitment [GET]
+
++ Response 200 (application/json)
+
+        {
+            "commitmentID": 1,
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### Create new commitment [POST]
+
++ Request (application/json)
+
+        {
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
++ Response 200 (application/json)
+
+        {
+            "commitmentID": 1,
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Delete commitment [DELETE]
+
++ Request (application/json)
+
+        {
+            "commitmentID": 21
+        }
+
++ Response 200 (application/json)
+
+        {
+            "Message": "Success!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### Update commitment [PATCH]
+
++ Request (application/json)
+
+        {
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
+
++ Response 200 (application/json)
+
+        {
+            "commitmentID": 1,
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
+## user-group collection [/Users/user-group/{?userID,groupID}]
+
+### User-group [GET]
+
++ Response 200 (application/json)
+
+        {
+            "userID": 13,
+            "groupID": 23
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### Create a New User-group [POST]
++ Request (application/json)
+
+        {
+            "userID": 21,
+            "groupID": 37
+        }
+
++ Response 200 (application/json)
+
+        {
+            "userID": 4,
+            "groupID": 37
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+### Delete a User-group [DELETE]
++ Request (application/json)
+
+        {
+            "id": 66
+        }
+
++ Response 200 (application/json)
+
+        {
+            "Message": "Success!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+ 
+### Update a User-group [PATCH]
++ Request (application/json)
+
+        {
+            "userID": “4”,
+            "groupID": “10”
+        }
+
++ Response 200 (application/json)
+
+        {
+            "userID": 4,
+            "groupID": 10
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+## group-info collection [/group-info/{?groupName}]
+
+### Group-info [GET]
+
++ Response 200 (application/json)
+
+        {
+            "groupID": 23,
+            "groupName": "something1"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Create a New Group_name [POST]
++ Request (application/json)
+
+        {
+            "groupName": "JLB"
+        }
+
++ Response 200 (application/json)
+
+        {
+             "groupID": 10,
+             "groupName": "JLB"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Delete a Group [DELETE]
++ Request (application/json)
+
+        {
+            "groupID": 66
+        }
+
++ Response 200 (application/json)
+
+        {
+            "Message": "Success!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### Update a Group [PATCH]
++ Request (application/json)
+
+        {
+            "groupName": "test6"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "groupID": 10,
+            "groupName": "test6"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
