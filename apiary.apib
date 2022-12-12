@@ -7,9 +7,39 @@ It's Komornik API app to manage your bills.
 
 
 
-## Users collection [/users/{?login,password,lastname,firstname,mail}]
+## Users collection
 
-### User [GET]
+### userCollection [GET]
+
++ Response 200 (application/json)
+
+        {   
+            "userID": 11,
+            "mail": "marcikn@xd.pl"
+            "firstname": "Marcin",
+            "lastname": "Kolski",
+            "login": "mkolski",
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### user [GET]
 
 + Response 200 (application/json)
 
@@ -38,7 +68,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Create a New User [POST]
+### createNewUser [POST]
 + Request (application/json)
 
         {
@@ -48,7 +78,7 @@ It's Komornik API app to manage your bills.
             "login": "mkolski",
             "password": "Ara$*kadabra2"
         }
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "mail": "newmail@xd.pl" 
@@ -76,7 +106,7 @@ It's Komornik API app to manage your bills.
         {
             "Message": "Service Unavailable"
         }
-### Delete a User [DELETE]
+### deleteUser [DELETE]
 + Request (application/json)
 
         {
@@ -106,7 +136,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Update a User [PATCH]
+### updateUser [PATCH]
 
 + Request (application/json)
 
@@ -148,9 +178,9 @@ It's Komornik API app to manage your bills.
         }
 
 
-## Bills collection [/Users/Commitments/Bills/{?recipientID,commitmentID,amount,isPaid}]
+## Bills collection
  
-### Bill [GET]
+### billCollection [GET]
 
 + Response 200 (application/json)
 
@@ -179,8 +209,37 @@ It's Komornik API app to manage your bills.
         {
             "Message": "Service Unavailable"
         }
+ 
+### bill [GET]
 
-### Create new bill [POST]
++ Response 200 (application/json)
+
+        {
+            "recipientID": 1,
+            "commitmentID": 1,
+            "amount": 2.37,
+            "isPaid": "no"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### createNewBill [POST]
 + Request (application/json)
 
         {
@@ -190,7 +249,7 @@ It's Komornik API app to manage your bills.
             "isPaid": "no"
         }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "billID": 11,
@@ -219,7 +278,7 @@ It's Komornik API app to manage your bills.
         }
 
 
-### Delete bill [DELETE]
+### deleteBill [DELETE]
 + Request (application/json)
 
         {
@@ -250,7 +309,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Update bill [PATCH]
+### billUpdate [PATCH]
 
 + Request (application/json)
 
@@ -289,9 +348,9 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-## Commitments collection [/Commitments/{?commitmentDesc,commitmentAmount,occurenceDate,expirationDate,giverID,groupID}]
+## Commitments collection
 
-### Commitment [GET]
+### commitmentCollection [GET]
 
 + Response 200 (application/json)
 
@@ -323,8 +382,39 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
+### commitment [GET]
 
-### Create new commitment [POST]
++ Response 200 (application/json)
+
+        {
+            "commitmentDesc": "tekst",
+            "commitmentAmount": 555,
+            "occurenceDate": "12.12.2023",
+            "expirationDate": "12.12.2054",
+            "giverID": 1,
+            "groupID": 1
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+
+### createNewCommitment [POST]
 
 + Request (application/json)
 
@@ -337,7 +427,7 @@ It's Komornik API app to manage your bills.
             "groupID": 1
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "commitmentID": 1,
@@ -367,7 +457,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Delete commitment [DELETE]
+### deleteCommitment [DELETE]
 
 + Request (application/json)
 
@@ -400,7 +490,7 @@ It's Komornik API app to manage your bills.
         }
 
 
-### Update commitment [PATCH]
+### commitmentUpdate [PATCH]
 
 + Request (application/json)
 
@@ -444,135 +534,8 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
         
-## user-group collection [/Users/user-group/{?userID,groupID}]
-
-### User-group [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "userID": 13,
-            "groupID": 23
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-
-### Create a New User-group [POST]
-+ Request (application/json)
-
-        {
-            "userID": 21,
-            "groupID": 37
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "userID": 4,
-            "groupID": 37
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-### Delete a User-group [DELETE]
-+ Request (application/json)
-
-        {
-            "id": 66
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "Message": "Success!"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
- 
-### Update a User-group [PATCH]
-+ Request (application/json)
-
-        {
-            "userID": “4”,
-            "groupID": “10”
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "userID": 4,
-            "groupID": 10
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-## group-info collection [/group-info/{?groupName}]
-
-### Group-info [GET]
+## Groups collection
+### groupCollection [GET]
 
 + Response 200 (application/json)
 
@@ -599,14 +562,40 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Create a New Group_name [POST]
+### groupInfo [GET]
+
++ Response 200 (application/json)
+
+        {
+            "groupName": "something1"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Content not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### createNewGroup [POST]
 + Request (application/json)
 
         {
             "groupName": "JLB"
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
              "groupID": 10,
@@ -631,7 +620,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### Delete a Group [DELETE]
+### deleteGroup [DELETE]
 + Request (application/json)
 
         {
@@ -663,7 +652,7 @@ It's Komornik API app to manage your bills.
         }
 
 
-### Update a Group [PATCH]
+### updateGroup [PATCH]
 + Request (application/json)
 
         {
