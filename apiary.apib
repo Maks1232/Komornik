@@ -9,18 +9,33 @@ It's Komornik API app to manage your bills.
 
 ## Users collection
 
-### userCollection [GET]
+### login [POST] [/login]
 
-+ Response 200 (application/json)
++ Request (application/json)
 
-        {   
-            "userID": 11,
-            "mail": "marcikn@xd.pl"
-            "firstname": "Marcin",
-            "lastname": "Kolski",
-            "login": "mkolski",
+        {
+            "user": {
+                "login": "wojcis",
+                "password": "wojpass"
+            }
         }
         
++ Response 200 (application/json)
+
+        {
+            "user": {
+                "id": 1,
+                "firstname": "wojciech",
+                "lastname": "cisek",
+                "login": "wojcis",
+                "password_digest": "$2a$12$RcutM.ykDjynWWwcwjULB.oQRVBMbTtOvpxwQwRmPtgIZ6Lf45ys2",
+                "mail": "woj@gmail.com",
+                "created_at": "2023-01-08T11:55:34.183Z",
+                "updated_at": "2023-01-08T11:55:34.183Z"
+            },
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.5ZCNzmcTcHefeEH0FVse8ebHQABcxiu53E6Y5HHGSAM"
+        }
+
 + Response 400 (application/json)
 
         {
@@ -30,7 +45,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found!"
         }
 
 + Response 503 (application/json)
@@ -39,7 +54,52 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### user [GET]
+### getUsers [GET] [/users]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "firstname": "wojciech",
+                "lastname": "cisek",
+                "login": "wojcis",
+                "password_digest": "$2a$12$RcutM.ykDjynWWwcwjULB.oQRVBMbTtOvpxwQwRmPtgIZ6Lf45ys2",
+                "mail": "woj@gmail.com",
+                "created_at": "2023-01-08T11:55:34.183Z",
+                "updated_at": "2023-01-08T11:55:34.183Z"
+            },
+            {
+                "id": 3,
+                "firstname": "krzysiek",
+                "lastname": "nowak",
+                "login": "krzynow",
+                "password_digest": "$2a$12$wxfAMDsmnrq7Je6p/VG3duyjQQ/qmk/0MbSIaLgK733YOTNuveBBa",
+                "mail": "krzy@gmail.com",
+                "created_at": "2023-01-08T12:54:53.000Z",
+                "updated_at": "2023-01-08T12:54:53.000Z"
+            }
+        ]
+        
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Not found!"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### getUser [GET]
 
 + Response 200 (application/json)
 
@@ -59,7 +119,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found!"
         }
 
 + Response 503 (application/json)
@@ -72,21 +132,28 @@ It's Komornik API app to manage your bills.
 + Request (application/json)
 
         {
-            "mail": "newmail@xd.pl" 
-            "firstname": "Marcin",
-            "lastname": "Kolski",
-            "login": "mkolski",
-            "password": "Ara$*kadabra2"
+            "user": {
+                "firstname": "testname",
+                "lastname": "testlast",
+                "login": "domiNEW_testhgj",
+                "password": "qwertyqwerty",
+                "mail": "dsgs@ryt.com"
+            }
         }
 + Response 201 (application/json)
 
         {
-            "mail": "newmail@xd.pl" 
-            "userID": 11,
-            "firstname": "Marcin",
-            "lastname": "Kolski",
-            "login": "mkolski",
-            "password": "Ara$*kadabra2"
+            "user": {
+                "id": 5,
+                "firstname": "testname",
+                "lastname": "testlast",
+                "login": "domiNEW_testhgj",
+                "password_digest": "$2a$12$AVBofYQznfxoCFgrz3Yaie3TXXYiskveSD7uTbhweNU3puFE7mlXW",
+                "mail": "dsgs@ryt.com",
+                "created_at": "2023-01-23T19:14:35.719Z",
+                "updated_at": "2023-01-23T19:14:35.719Z"
+            },
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dLDawzSs7jcWH-RM0agCVLnPRqCS7o8ZppzaCrzr9fE"
         }
   
 + Response 400 (application/json)
@@ -98,7 +165,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found!"
         }
 
 + Response 503 (application/json)
@@ -110,7 +177,7 @@ It's Komornik API app to manage your bills.
 + Request (application/json)
 
         {
-            "userID": 21
+            "id": 21
         }
 + Response 200 (application/json)
 
@@ -127,7 +194,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found!"
         }
 
 + Response 503 (application/json)
@@ -141,22 +208,23 @@ It's Komornik API app to manage your bills.
 + Request (application/json)
 
         {
-            "mail": "newmail2@xd.pl" 
-            "firstname": "Marcin",
-            "lastname": "Kolski",
-            "login": "mkolski",
-            "password": "abrakadabra2"
+          "id": 3,
+          "firstname": "Emlynn",
+          "lastname": "Eastabrook",
+          "login": "Aurea",
+          "password": "eb6WkMrjclPw",
+          "mail": "aeastabrook0@walmart.com"
         }
         
 + Response 200 (application/json)
 
         {
-            "userID": 14,
-            "mail": "newmail2@xd.pl" 
-            "firstname": "Marcin",
-            "lastname": "Kolski",
-            "login": "mkolski",
-            "password": "abrakadabra2"
+          "id": 3,
+          "firstname": "Emlynn",
+          "lastname": "Eastabrook",
+          "login": "Aurea",
+          "password": "eb6WkMrjclPw",
+          "mail": "aeastabrook0@walmart.com"
         }
         
 + Response 400 (application/json)
@@ -168,7 +236,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found!"
         }
 
 + Response 503 (application/json)
