@@ -45,7 +45,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -90,7 +90,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -99,7 +99,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### getUser [GET]
+### getUser [GET] [/users/:id]
 
 + Response 200 (application/json)
 
@@ -119,7 +119,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -128,7 +128,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### createNewUser [POST]
+### createNewUser [POST] [/users]
 + Request (application/json)
 
         {
@@ -165,7 +165,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -173,7 +173,7 @@ It's Komornik API app to manage your bills.
         {
             "Message": "Service Unavailable"
         }
-### deleteUser [DELETE]
+### deleteUser [DELETE] [/users/:id]
 + Request (application/json)
 
         {
@@ -182,7 +182,7 @@ It's Komornik API app to manage your bills.
 + Response 200 (application/json)
 
         {
-            "Message": "Success!"
+            "message": "User deleted!"
         }
         
 + Response 400 (application/json)
@@ -194,7 +194,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -203,7 +203,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### updateUser [PATCH]
+### updateUser [PATCH] [/users/:id]
 
 + Request (application/json)
 
@@ -236,7 +236,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -248,16 +248,18 @@ It's Komornik API app to manage your bills.
 
 ## Bills collection
  
-### billCollection [GET]
+### billCollection [GET] [/bills]
 
 + Response 200 (application/json)
 
         {
-            "billID": 1,
-            "recipientID": 1,
-            "commitmentID": 1,
-            "amount": 2.37,
-            "isPaid": "no"
+            "id": 1,
+            "amount": 90,
+            "created_at": "2023-01-23T19:52:55.356Z",
+            "updated_at": "2023-01-23T19:52:55.356Z",
+            "ispaid": false,
+            "user_id": 1,
+            "commitment_id": 4
         }
         
 + Response 400 (application/json)
@@ -269,7 +271,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -278,15 +280,18 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
  
-### bill [GET]
+### bill [GET] [/bills/:id]
 
 + Response 200 (application/json)
 
         {
-            "recipientID": 1,
-            "commitmentID": 1,
-            "amount": 2.37,
-            "isPaid": "no"
+            "id": 1,
+            "amount": 90,
+            "created_at": "2023-01-23T19:52:55.356Z",
+            "updated_at": "2023-01-23T19:52:55.356Z",
+            "ispaid": false,
+            "user_id": 1,
+            "commitment_id": 4
         }
         
 + Response 400 (application/json)
@@ -298,7 +303,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -307,95 +312,24 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### createNewBill [POST]
-+ Request (application/json)
-
-        {
-            "recipientID": 11,
-            "commitmentID": 113,
-            "amount": 21.37,
-            "isPaid": "no"
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "billID": 11,
-            "recipientID": 11,
-            "commitmentID": 113,
-            "amount": 21.37,
-            "isPaid": "no"
-        }
-        
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-
-### deleteBill [DELETE]
-+ Request (application/json)
-
-        {
-            "billID": 21
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "Message": "Success!"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 404 (application/json)
-
-        {
-            "Message": "Content not found!"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### billUpdate [PATCH]
+### PayTheBill [PATCH] [/bills/:id]
 
 + Request (application/json)
 
         {
-            "recipientID": 1,
-            "commitmentID": 1,
-            "amount": 25.37,
-            "isPaid": "yes"
+            "ispaid": true
         }
         
 + Response 200 (application/json)
 
         {
-            "billID": 1,
-            "recipientID": 1,
-            "commitmentID": 1,
-            "amount": 25.37,
-            "isPaid": "yes"
+            "ispaid": true,
+            "id": 1,
+            "amount": 90,
+            "created_at": "2023-01-23T19:52:55.356Z",
+            "updated_at": "2023-01-23T20:12:42.372Z",
+            "user_id": 1,
+            "commitment_id": 4
         }
 
 + Response 400 (application/json)
@@ -407,7 +341,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -418,18 +352,31 @@ It's Komornik API app to manage your bills.
 
 ## Commitments collection
 
-### commitmentCollection [GET]
+### commitmentCollection [GET] [/commitments]
 
 + Response 200 (application/json)
 
         {
-            "commitmentID": 1,
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "id": 2,
+            "commitmentdesc": "Zakup środków czystości 12",
+            "commitmentamount": 155,
+            "occurancedate": "2023-11-02",
+            "expirationdate": "2024-12-02",
+            "created_at": "2023-01-07T16:04:04.347Z",
+            "updated_at": "2023-01-07T16:04:04.347Z",
+            "groupinfo_id": 1,
+            "user_id": 2
+        },
+        {
+            "id": 5,
+            "commitmentdesc": "Zakup środków czystości 1234",
+            "commitmentamount": 15,
+            "occurancedate": "2023-11-02",
+            "expirationdate": "2024-12-02",
+            "created_at": "2023-01-07T17:30:47.761Z",
+            "updated_at": "2023-01-07T17:30:47.761Z",
+            "groupinfo_id": 1,
+            "user_id": 2
         }
 
 + Response 400 (application/json)
@@ -441,7 +388,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -450,17 +397,20 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### commitment [GET]
+### commitment [GET] [/commitments/:id]
 
 + Response 200 (application/json)
 
         {
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "id": 2,
+            "commitmentdesc": "Zakup środków czystości 12",
+            "commitmentamount": 155,
+            "occurancedate": "2023-11-02",
+            "expirationdate": "2024-12-02",
+            "created_at": "2023-01-07T16:04:04.347Z",
+            "updated_at": "2023-01-07T16:04:04.347Z",
+            "groupinfo_id": 1,
+            "user_id": 2
         }
 
 + Response 400 (application/json)
@@ -472,7 +422,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -482,29 +432,31 @@ It's Komornik API app to manage your bills.
         }
 
 
-### createNewCommitment [POST]
+### createNewCommitment [POST] [/commitments]
 
 + Request (application/json)
 
         {
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "group_id": 3,
+            "giver_id": 1,
+            "commitmentdesc": "Zakup środków czystości asd3sdd",
+            "commitmentamount": 5505,
+            "occurancedate": "02.11.2023",
+            "expirationdate": "02.12.2024"
         }
 
 + Response 201 (application/json)
 
         {
-            "commitmentID": 1,
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "id": 17,
+            "commitmentdesc": "Zakup środków czystości asd3sdd",
+            "commitmentamount": 5505,
+            "occurancedate": "2023-11-02",
+            "expirationdate": "2024-12-02",
+            "created_at": "2023-01-23T19:58:58.453Z",
+            "updated_at": "2023-01-23T19:58:58.453Z",
+            "groupinfo_id": 1,
+            "user_id": 3
         }
 
 + Response 400 (application/json)
@@ -516,7 +468,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -525,7 +477,7 @@ It's Komornik API app to manage your bills.
             "Message": "Service Unavailable"
         }
 
-### deleteCommitment [DELETE]
+### deleteCommitment [DELETE] [/commitments/:id]
 
 + Request (application/json)
 
@@ -536,7 +488,7 @@ It's Komornik API app to manage your bills.
 + Response 200 (application/json)
 
         {
-            "Message": "Success!"
+            "Message": "Commitment deleted!"
         }
 
 + Response 400 (application/json)
@@ -548,7 +500,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -558,30 +510,23 @@ It's Komornik API app to manage your bills.
         }
 
 
-### commitmentUpdate [PATCH]
+### commitmentUpdate [PATCH] [/groupinfos/:id/commitments/:id]
 
 + Request (application/json)
 
         {
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "group_id": 1,
+            "user_id": 1,
+            "commitmentdesc": "Zakup środków czystości asd3d",
+            "commitmentamount": 105,
+            "occurancedate": "02.11.2023",
+            "expirationdate": "02.12.2024"
         }
-
 
 + Response 200 (application/json)
 
         {
-            "commitmentID": 1,
-            "commitmentDesc": "tekst",
-            "commitmentAmount": 555,
-            "occurenceDate": "12.12.2023",
-            "expirationDate": "12.12.2054",
-            "giverID": 1,
-            "groupID": 1
+            "message": "Zaaktualizowano! Jeśli wartość zobowiązania uległa zmianie - Nie zapomnij o ponownym podziale zobowiązania na rachunki!"
         }
 
 + Response 400 (application/json)
@@ -593,7 +538,7 @@ It's Komornik API app to manage your bills.
 + Response 404 (application/json)
 
         {
-            "Message": "Content not found!"
+            "Message": "Not found"
         }
 
 + Response 503 (application/json)
@@ -601,6 +546,61 @@ It's Komornik API app to manage your bills.
         {
             "Message": "Service Unavailable"
         }
+        
+### splitCommitment [POST] [/commitments/split]
+
++ Request (application/json)
+
+        {
+            "group_id": 1,
+            "commitment_id": 1,
+            "bills":    [
+            { "user_id": 1, "amount": 100 },
+            { "user_id": 2, "amount": 15 }
+                        ]
+        }
+
++ Response 201 (application/json)
+
+[
+        {
+            "id": 30,
+            "amount": 5000,
+            "created_at": "2023-01-23T20:42:21.473Z",
+            "updated_at": "2023-01-23T20:42:21.473Z",
+            "ispaid": false,
+            "user_id": 4,
+            "commitment_id": 18
+        },
+        {
+            "id": 31,
+            "amount": 505,
+            "created_at": "2023-01-23T20:42:21.492Z",
+            "updated_at": "2023-01-23T20:42:21.492Z",
+            "ispaid": false,
+            "user_id": 2,
+            "commitment_id": 18
+        }
+]
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 404 (application/json)
+
+        {
+            "Message": "Not found"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
         
 ## Groups collection
 ### groupCollection [GET] [/groupinfos]
